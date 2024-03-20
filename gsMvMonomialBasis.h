@@ -32,7 +32,9 @@ template<short_t d,class T>
 class gsMvMonomialBasis : public gsBasis<T>
 {
 public:
+#define Eigen gsEigen
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+#undef Eigen
 
 public:
     /// Shared pointer for gsMvMonomialBasis
@@ -52,7 +54,7 @@ public:
 
 private:
 
-    typedef Eigen::internal::variable_if_dynamic<unsigned,d> dimType;
+    typedef gsEigen::internal::variable_if_dynamic<unsigned,d> dimType;
     dimType m_d;
     short_t m_degree;
     std::vector<gsVector<index_t> > m_compositions;

@@ -1,4 +1,3 @@
-%%%%%
 #pragma once
 #include <cmath>
 
@@ -147,5 +146,5 @@ private:
 
 
 //include the hpp file that contains the file definitions
-#include "gsMvLegendreBasis.hpp"
+//#include "gsMvLegendreBasis.hpp"
 

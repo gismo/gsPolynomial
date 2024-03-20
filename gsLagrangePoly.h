@@ -55,10 +55,10 @@ public:
 
     /// Construct a Lagrange curve that resembles the \a part -th part of a bezier sequence
     /// by interpolating at degree+1 values
-    gsLagrangePoly( const gsBezier<T> & bezier_curve, int part) : Base()
+    gsLagrangePoly( const gsBSpline<T> & bezier_curve, int part) : Base()
     {
-        gsBernsteinBasis<T> basis = bezier_curve.basis();
-        gsKnotVector<T> * bezier_knots = basis.domain();
+        gsBSplineBasis<T> basis = bezier_curve.basis();
+        gsKnotVector<T> * bezier_knots = &basis.knots();
         T start = (*bezier_knots)[part];
         T end = (*bezier_knots)[part+1];
         gsLagrangeBasis<T> * lagrange_basis = new gsLagrangeBasis<T>(0,1, basis.degree()-1);
@@ -109,13 +109,13 @@ public:
     /// gives back a BezierCurve, that resembles this Lagrange Curve in the parametric
     /// domain [0,1]. If the parametric domain of the Lagrange Curve is different from
     /// [0,1], the method reparameterizeToZeroOne() can be called to change this.
-    gsBezier<T> * transformToBezier()
+    gsBSpline<T> * transformToBezier()
     {
         gsMatrix<T> transformMat;
         this->basis().getTransformationLagrangeBezier(transformMat);
         gsMatrix<T> newCoefs = transformMat*this->coefs();
         unsigned deg = this->basis().degree();
-        gsBezier<T> * bezCurve = new gsBezier<T>(deg,newCoefs);
+        gsBSpline<T> * bezCurve = new gsBSpline<T>(0.0,1.0,0,deg,newCoefs);
         return bezCurve;
     }
 

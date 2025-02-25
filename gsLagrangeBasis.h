@@ -8,6 +8,7 @@
 #include <gsUtils/gsCombinatorics.h>
 #include <gsCore/gsBoundary.h>
 #include <gsCore/gsBasis.h>
+#include <gsDomain/gsDomain.h>
 
 namespace gismo
 {
@@ -249,7 +250,7 @@ public:
 
     /// Return the gsDomain which represents the parameter domain of
     /// this basis. Currently unused.
-    gsDomain<T> * domain() const
+    typename gsDomain<T>::Ptr domain() const
     { GISMO_NO_IMPLEMENTATION }
 
     /// Returns the polynomial degree.
